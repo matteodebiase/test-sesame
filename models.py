@@ -1,5 +1,7 @@
 from dataclasses import dataclass
 
+from huggingface_hub import PyTorchModelHubMixin
+
 import torch
 import torch.nn as nn
 import torchtune
@@ -95,7 +97,7 @@ class ModelArgs:
     audio_num_codebooks: int
 
 
-class Model(nn.Module):
+class Model(nn.Module, PyTorchModelHubMixin, repo_url="https://github.com/SesameAILabs/csm", pipeline_tag="text-to-speech", license="apache-2.0"):
     def __init__(self, args: ModelArgs):
         super().__init__()
         self.args = args
